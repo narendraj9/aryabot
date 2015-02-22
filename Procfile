@@ -1,1 +1,1 @@
-app: bin/hubot -a irc -n stacy
+app: bin/hubot -a irc -n stacy -l @
