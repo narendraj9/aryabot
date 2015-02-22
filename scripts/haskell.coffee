@@ -38,6 +38,9 @@ module.exports = (robot) ->
 
             result = JSON.parse(body)
 
+            # debug
+            msg.send JSON.stringify(result)
+
             if result.error
               msg.reply result.error
             else
