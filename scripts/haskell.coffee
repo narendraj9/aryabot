@@ -43,7 +43,7 @@ module.exports = (robot) ->
                 type = result.success.type
                
                 # send the expression's value and type to the channel
-                msg.send ("> " + value)
+                msg.send value
                 msg.send ("\nit :: " + type)
                 msg.send "\n"
                 
