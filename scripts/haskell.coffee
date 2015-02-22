@@ -26,7 +26,6 @@ module.exports = (robot) ->
     })
 
     msg.http("http://tryhaskell.org/eval")
-      .query({method: "eval", expr: script})
       .headers(Cookie: "HASKELLJSON=#{HASKELLJSON}")
       .post(data) (err, res, body) ->
         switch res.statusCode
