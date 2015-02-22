@@ -40,14 +40,15 @@ module.exports = (robot) ->
 
             # debug
             msg.send JSON.stringify(result)
-
-            if result.error
-              msg.reply result.error
-            else
-              if result.success
-                outputs = result.success.split("\n")
-                for output in outputs
-                  msg.reply output
-              msg.reply result.success.type
+            
+            if result.success
+                value = result.success.value
+                type = result.success.type
+               
+                # send the expression's value and type to the channel
+                msg.send value
+                msg.send ("\n :: " + type)
+                msg.send "\n"
+                
           else
             msg.reply "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
