@@ -20,6 +20,7 @@ module.exports = (robot) ->
     script = msg.match[2]
 
     robot.http("http://tryhaskell.org/eval")
+        .headers(Cookie: "HASKELLJSON=#{HASKELLJSON}")
         .post((err, req) ->
             req.write 'exp' script
             req.write 'dataType' 'json'
