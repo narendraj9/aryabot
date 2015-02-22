@@ -13,33 +13,32 @@
 # Author:
 #   edwardgeorge, slightly modified from code by jingweno
 
+HASKELLJSON = ""
+
 module.exports = (robot) ->
   robot.respond /(haskell)\s+(.*)/i, (msg)->
     script = msg.match[2]
-    data = JSON.stringify({
-        exp: script,
-        dataType: 'json'
-    })
 
     robot.http("http://tryhaskell.org/eval")
-      .post(data) (err, res, body) ->
-        msg.send "Made the post request. Got -- "
-        msg.send (JSON.stringify(JSON.parse(body)))
-        msg.send res
+        .post((err, req) ->
+            req.write 'exp' script
+            req.write 'dataType' 'json'
+        ) (err, res, body) ->
+            msg.send ("Status code: " + res.statusCode)
 
-        switch res.statusCode
-          when 200
-            if res.headers["set-cookie"]
-              HASKELLJSON = res.headers["set-cookie"][0].match(/HASKELLJSON=([-a-z0-9]+);/)[1]
-            result = JSON.parse(body)
+            switch res.statusCode
+              when 200
+                if res.headers["set-cookie"]
+                  HASKELLJSON = res.headers["set-cookie"][0].match(/HASKELLJSON=([-a-z0-9]+);/)[1]
+                result = JSON.parse(body)
 
-            if result.error
-              msg.reply result.error
-            else
-              if result.result
-                outputs = result.result.split("\n")
-                for output in outputs
-                  msg.reply output
-              msg.reply result.type
-          else
-            msg.reply "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
+                if result.error
+                  msg.reply result.error
+                else
+                  if result.result
+                    outputs = result.result.split("\n")
+                    for output in outputs
+                      msg.reply output
+                  msg.reply result.type
+              else
+                msg.reply "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
