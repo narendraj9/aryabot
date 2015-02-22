@@ -31,8 +31,11 @@ module.exports = (robot) ->
       .post() (err, res, body) ->
         switch res.statusCode
           when 200
-            if res.headers["set-cookie"]
-              HASKELLJSON = res.headers["set-cookie"][0].match(/HASKELLJSON=([-a-z0-9]+);/)[1]
+
+            # cookies? ? ?
+            #if res.headers["set-cookie"]
+            #  HASKELLJSON = res.headers["set-cookie"][0].match(/HASKELLJSON=([-a-z0-9]+);/)[1]
+
             result = JSON.parse(body)
 
             if result.error
