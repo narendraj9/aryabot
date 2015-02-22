@@ -18,11 +18,14 @@ HASKELLJSON=""
 module.exports = (robot) ->
   robot.respond /(haskell)\s+(.*)/i, (msg)->
     script = msg.match[2]
+    data = JSON.stringify({
+        exp: script,
+        dataType: 'json'
+    })
 
-    msg.http("http://tryhaskell.org/haskell.json")
-      .query({method: "eval", expr: script})
+    msg.http("http://tryhaskell.org/eval")
       .headers(Cookie: "HASKELLJSON=#{HASKELLJSON}")
-      .get() (err, res, body) ->
+      .post(data) (err, res, body) ->
         switch res.statusCode
           when 200
             if res.headers["set-cookie"]
