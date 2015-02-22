@@ -38,16 +38,13 @@ module.exports = (robot) ->
 
             result = JSON.parse(body)
 
-            # debug
-            msg.send JSON.stringify(result)
-            
             if result.success
                 value = result.success.value
                 type = result.success.type
                
                 # send the expression's value and type to the channel
-                msg.send value
-                msg.send ("\n :: " + type)
+                msg.send ("> " + value)
+                msg.send ("\nit :: " + type)
                 msg.send "\n"
                 
           else
