@@ -24,8 +24,6 @@ module.exports = (robot) ->
             req.write 'exp' script
             req.write 'dataType' 'json'
         ) (err, res, body) ->
-            msg.send ("Status code: " + res.statusCode)
-
             switch res.statusCode
               when 200
                 if res.headers["set-cookie"]
