@@ -23,8 +23,9 @@ module.exports = (robot) ->
 
     robot.http("http://tryhaskell.org/eval")
       .post(data) (err, res, body) ->
-        msg.reply (JSON.parse(body).succuss)
-        msg.reply res
+        msg.send "Made the post request. Got -- "
+        msg.send (JSON.parse(body).success)
+        msg.send res
 
         switch res.statusCode
           when 200
