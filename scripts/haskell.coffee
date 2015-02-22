@@ -13,7 +13,7 @@
 # Author:
 #   edwardgeorge, slightly modified from code by jingweno
 
-HASKELLJSON=""
+HASKELLJSON="1234567789"
 
 module.exports = (robot) ->
   robot.respond /(haskell)\s+(.*)/i, (msg)->
