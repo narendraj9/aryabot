@@ -21,7 +21,6 @@
     "hubot-shipit": "^0.1.2",
     "hubot-youtube": "^0.1.2",
     "hubot-motivate": ">=0.0.0"
-    
   },
   "engines": {
     "node": "0.10.x"
