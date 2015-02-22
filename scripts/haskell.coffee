@@ -23,6 +23,9 @@ module.exports = (robot) ->
 
     robot.http("http://tryhaskell.org/eval")
       .post(data) (err, res, body) ->
+        msg.reply (JSON.parse(body).succuss)
+        msg.reply res
+
         switch res.statusCode
           when 200
             if res.headers["set-cookie"]
