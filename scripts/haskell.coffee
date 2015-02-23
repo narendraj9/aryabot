@@ -44,14 +44,12 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
                            
             # send the expression's value and type to the channel
             if say_value
-              msg.send (value ++ "\n")
+              msg.send (value + "\n")
             if say_type
               msg.send ("\nit :: " + type + "\n")
-
-            # just to keep coffescript happy
-            return 0
           else
             msg.send result.error
+
         else
           msg.reply "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
 
