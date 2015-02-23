@@ -47,6 +47,9 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
               msg.send (value ++ "\n")
             if say_type
               msg.send ("\nit :: " + type + "\n")
+
+            # just to keep coffescript happy
+            return 0
           else
             msg.send result.error
         else
