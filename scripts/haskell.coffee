@@ -18,17 +18,17 @@ HASKELLJSON="1234567789"
 # common function for respond and hear
 eval_exp = (robot, msg)->
     script = msg.match[2]
-        msg.send script
+    msg.send script
 
-        data = {
-            'exp': script,
-            'dataType': 'json'
-        }
+    data = {
+        'exp': script,
+        'dataType': 'json'
+   }
 
-        robot.http("http://tryhaskell.org/eval")
-            .headers(Cookie: "HASKELLJSON=#{HASKELLJSON}")
-            .query(data)
-            .post() (err, res, body) ->
+   robot.http("http://tryhaskell.org/eval")
+        .headers(Cookie: "HASKELLJSON=#{HASKELLJSON}")
+        .query(data)
+        .post() (err, res, body) ->
                 switch res.statusCode
                     when 200
                         # cookies? ? ?
