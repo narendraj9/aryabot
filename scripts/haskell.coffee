@@ -16,7 +16,9 @@
 HASKELLJSON="1234567789"
 
 # common function for respond and hear
-eval_exp = (robot, msg) ->
+# value: boolean flag tell whether to print value
+# type: whether print type or not
+eval_exp = (robot, msg, value=true, type=false) ->
   script = msg.match[2]
   msg.send script
 
@@ -38,8 +40,10 @@ eval_exp = (robot, msg) ->
           result = JSON.parse(body)
 
           if result.success
-            value = result.success.value
-            type = result.success.type
+            if value
+              value = result.success.value
+            if type
+              type = result.success.type
                            
             # send the expression's value and type to the channel
             msg.send value
@@ -52,6 +56,7 @@ eval_exp = (robot, msg) ->
 
 module.exports = (robot) ->
   robot.respond /(haskell)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
+  robot.hear /(^@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, value=false, type=true)
   robot.hear /(^>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
     
   
