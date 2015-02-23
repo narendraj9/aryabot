@@ -46,6 +46,9 @@ module.exports = (robot) ->
                 msg.send value
                 msg.send ("\nit :: " + type)
                 msg.send "\n"
-                
+            else 
+                if result.error
+                    msg.send result.error
+               
           else
             msg.reply "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
