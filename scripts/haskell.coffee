@@ -20,7 +20,6 @@ HASKELLJSON="1234567789"
 # type: whether print type or not
 eval_exp = (robot, msg, value=true, type=false) ->
   script = msg.match[2]
-  msg.send script
 
   data = {
     'exp': script,
@@ -40,15 +39,14 @@ eval_exp = (robot, msg, value=true, type=false) ->
           result = JSON.parse(body)
 
           if result.success
-            if value
-              value = result.success.value
-            if type
-              type = result.success.type
+            value = result.success.value
+            type = result.success.type
                            
             # send the expression's value and type to the channel
-            msg.send value
-            msg.send ("\nit :: " + type)
-            msg.send "\n"
+            if value
+              msg.send (value ++ "\n")
+            if type
+              msg.send ("\nit :: " + type + "\n")
           else
             msg.send result.error
         else
