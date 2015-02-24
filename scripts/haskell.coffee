@@ -45,7 +45,7 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
             # send the expression's value and type to the channel
             if say_value
               msg.send (value + "\n")
-            if (say_type || value === "")
+            if (say_type or value == "")
               msg.send ("\nit :: " + type + "\n")
           else
             msg.send result.error
