@@ -47,8 +47,10 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
               msg.send (value + "\n")
             if (say_type or value == "")
               msg.send ("\nit :: " + type + "\n")
-          else
+          else if result.error
             msg.send result.error
+          else
+            msg.send ":-( No one ever told me how to evaluate this!"
 
         else
           msg.reply "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
