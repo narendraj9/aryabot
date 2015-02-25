@@ -49,7 +49,7 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
             if (say_type or value == "")
               msg.send ("\nit :: " + type + "\n")
             if stdout
-              msg.send (stdout ++ "\n")
+              msg.send (stdout + "\n")
              
           else if result.error
             msg.send result.error
