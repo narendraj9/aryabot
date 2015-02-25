@@ -41,15 +41,19 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
           if result.success
             value = result.success.value
             type = result.success.type
-                           
+            stdout = result.succes.stdout
+            
             # send the expression's value and type to the channel
             if say_value
               msg.send (value + "\n")
             if (say_type or value == "")
               msg.send ("\nit :: " + type + "\n")
+            if stdout
+              msg.send (stdout ++ "\n")
+             
           else if result.error
             msg.send result.error
-          else
+          else 
             msg.send ":-( No one ever told me how to evaluate this!"
 
         else
@@ -57,7 +61,12 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
 
 module.exports = (robot) ->
   robot.respond /(haskell)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
+
+  # get it on hearing > or @type.
   robot.hear /(^@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, false, true)
   robot.hear /(^>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
-    
+  
+  # also respond to them in private messages.
+  robot.respond /(^@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, false, true)
+  robot.respond /(^>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
   
