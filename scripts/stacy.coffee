@@ -4,4 +4,8 @@
 
 module.exports = (robot) ->
     robot.hear /good(\s*)night/i, (msg) ->
-        msg.send "goodnight! :)"
+
+        # generate a random number and say it 1/4 of the time
+        say_it = msg.random [false, true, false, false]
+        if say_it
+            msg.send "goodnight! :)"
