@@ -60,12 +60,11 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
 
 module.exports = (robot) ->
   robot.respond /(haskell)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
+  robot.respond /^(>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
+  robot.respond /^(@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, false, true)
 
   # get it on hearing > or @type.
-  robot.hear /(^@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, false, true)
-  robot.hear /(^>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
+  robot.hear /^(@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, false, true)
+  robot.hear /^(>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
   
-  # also respond to them in private messages.
-  robot.respond /(^@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, false, true)
-  robot.respond /(^>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
   
