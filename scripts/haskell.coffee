@@ -20,11 +20,6 @@ HASKELLJSON="1234567789"
 # type: whether print type or not
 eval_exp = (robot, msg, say_value=true, say_type=false) ->
   script = msg.match[2]
-  value_str = ""
-  type_str = ""
-  stdout_str = ""
-  err_str = ""
-  rest_str = ""
 
   data = {
     'exp': script,
@@ -49,31 +44,28 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
 
             # send the expression's value and type to the channel
             if say_value
-              value_str = (value + "\n")
+              msg.send (value + "\n")
             if (say_type or value == "")
-              type_str = ("\nit :: " + type + "\n")
+              msg.send ("\nit :: " + type + "\n")
             if result.success.stdout
-              stdout_str = (result.success.stdout + "\n")
+              msg.send (result.success.stdout + "\n")
              
           else if result.error
-            err_str = result.error
+            msg.send result.error
           else 
-             rest_str = ":-( No one ever told me how to evaluate this!"
-
+            msg.send ":-( No one ever told me how to evaluate this!"
 
         else
-          rest_str = "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
-
-      return "#{value_str}#{type_str}#{stdout_str}#{rest_str}" 
+          msg.reply "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
 
 module.exports = (robot) ->
-  robot.respond /(haskell)\s+(.*)/i, (msg) -> msg.send (eval_exp(robot, msg))
+  robot.respond /(haskell)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
 
   # get it on hearing > or @type.
-  robot.hear /(^@type)\s+(.*)/i, (msg) -> msg.send (eval_exp(robot, msg, false, true))
-  robot.hear /(^>)\s+(.*)/i, (msg) -> msg.send (eval_exp(robot, msg))
+  robot.hear /(^@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, false, true)
+  robot.hear /(^>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
   
   # also respond to them in private messages.
-  robot.respond /(^@type)\s+(.*)/i, (msg) -> msg.reply (eval_exp(robot, msg, false, true))
-  robot.respond /(^>)\s+(.*)/i, (msg) -> msg.reply (eval_exp(robot, msg))
+  robot.respond /(^@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, false, true)
+  robot.respond /(^>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
   
