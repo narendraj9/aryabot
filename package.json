@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "author": "Narendra Joshi <narendraj9@gmail.com>",
-  "description": "I am simple. I am sweet. I am stacy!",
+  "description": "I have been happily living at #fp@nith.",
   "dependencies": {
     "hubot": "^2.11.1",
     "hubot-diagnostics": "0.0.1",
