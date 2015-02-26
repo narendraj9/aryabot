@@ -56,10 +56,11 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
           else 
             ret = ret + ":-( No one ever told me how to evaluate this!"
 
+          return ret
+
         else
           ret = ret + "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
-
-      return ret
+          return ret
 
 
 module.exports = (robot) ->
