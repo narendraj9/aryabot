@@ -13,4 +13,5 @@ module.exports = (robot) ->
     robot.hear /anybody\s+there\s*?/i, (msg) ->
         # send Walter De' Lamere's poem [I don't care about the speeling.]
         msg.send "http://www.poetryfoundation.org/poem/177007"
+        msg.send "Yes!"
 
