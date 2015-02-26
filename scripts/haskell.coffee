@@ -20,7 +20,11 @@ HASKELLJSON="1234567789"
 # type: whether print type or not
 eval_exp = (robot, msg, say_value=true, say_type=false) ->
   script = msg.match[2]
-  ret = "" 
+  value_str = ""
+  type_str = ""
+  stdout_str = ""
+  err_str = ""
+  rest_str = ""
 
   data = {
     'exp': script,
@@ -45,23 +49,22 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
 
             # send the expression's value and type to the channel
             if say_value
-              ret = ret + (value + "\n")
+              value_str = (value + "\n")
             if (say_type or value == "")
-              ret = ret + ("\nit :: " + type + "\n")
+              type_str = ("\nit :: " + type + "\n")
             if result.success.stdout
-              ret = ret + (result.success.stdout + "\n")
+              stdout_str = (result.success.stdout + "\n")
              
           else if result.error
-            ret = ret + result.error
+            err_str = result.error
           else 
-            ret = ret + ":-( No one ever told me how to evaluate this!"
+             rest_str = ":-( No one ever told me how to evaluate this!"
 
-          return ret
 
         else
-          ret = ret + "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
-          return ret
+          rest_str = "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
 
+      return "#{value_str}#{type_str}#{stdout_str}#{rest_str}" 
 
 module.exports = (robot) ->
   robot.respond /(haskell)\s+(.*)/i, (msg) -> msg.send (eval_exp(robot, msg))
