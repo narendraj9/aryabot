@@ -59,6 +59,9 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
         else
           ret = ret + "Unable to evaluate script: #{script}. Request returned with the status code: #{res.statusCode}"
 
+      return ret
+
+
 module.exports = (robot) ->
   robot.respond /(haskell)\s+(.*)/i, (msg) -> msg.send eval_exp(robot, msg)
 
