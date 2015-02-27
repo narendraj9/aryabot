@@ -66,5 +66,8 @@ module.exports = (robot) ->
   # get it on hearing > or @type.
   robot.hear /^(@type)\s+(.*)/i, (msg) -> eval_exp(robot, msg, false, true)
   robot.hear /^(>)\s+(.*)/i, (msg) -> eval_exp(robot, msg)
-  
+ 
+  robot.hear /$\(.*)/i, (msg) -> 
+    lambda_query = msg.match[1] 
+    robot.command ('/query lambdabot #{lambda_query}'
   
