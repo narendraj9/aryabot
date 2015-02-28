@@ -15,3 +15,7 @@ module.exports = (robot) ->
         msg.send "http://www.poetryfoundation.org/poem/177007"
         msg.send "Yes!"
 
+    robot.hear /who\s+is\s+theKillingJoke\s*?/i, (msg) ->
+    	# Based on the epic interaction between pranavk and akshika.
+    	msg.send "I'm not theKillingJoke."
+    	msg.send "You are theKillingJoke."
