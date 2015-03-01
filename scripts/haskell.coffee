@@ -26,7 +26,7 @@ eval_exp = (robot, msg, say_value=true, say_type=false) ->
     'dataType': 'json'
   }
 
-  robot.http("http://tryhaskell.herokuapp.com/eval")
+  robot.http("http://tryhaskell.org/eval")
     .headers(Cookie: "HASKELLJSON=#{HASKELLJSON}")
     .query(data)
     .post() (err, res, body) ->
