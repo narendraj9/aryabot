@@ -19,3 +19,7 @@ module.exports = (robot) ->
     	# Based on the epic interaction between pranavk and akshika.
     	msg.send "I'm not theKillingJoke."
     	msg.send "You are theKillingJoke."
+
+    robot.hear /^\s*logs?\s*/i, (msg) ->
+        # show logs url
+        msg.send "Logs at: https://botbot.me/freenode/fpnith/"
