@@ -1,1 +1,1 @@
-web: bin/hubot -a irc -n aryabot -l '@'
+web: while (:) do bin/hubot -a irc -n aryabot -l '@' ; done
