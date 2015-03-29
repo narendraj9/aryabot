@@ -23,3 +23,6 @@ module.exports = (robot) ->
     robot.hear /^\s*logs?\s*/i, (msg) ->
         # show logs url
         msg.send "Logs at: https://botbot.me/freenode/fpnith/"
+    
+    robot.hear /^I have gone mad. I need a break/i, (msg) ->
+        msg.send "Go have some sleep narendra!"
