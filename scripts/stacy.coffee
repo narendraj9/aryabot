@@ -28,5 +28,5 @@ module.exports = (robot) ->
         msg.send "Go have some sleep narendra!"
 
     robot.hear /^\s*why\s+fp\s*?/i, (msg) ->
-        msg.send "Tail recursion is it's own reward."
+        msg.send "Tail recursion is its own reward."
         msg.send "https://xkcd.com/1270/"
