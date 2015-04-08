@@ -20,7 +20,7 @@ module.exports = (robot) ->
     	msg.send "I'm not theKillingJoke."
     	msg.send "You are theKillingJoke."
 
-    robot.respond /^\s*logs\s*/i, (msg) ->
+    robot.respond /logs/i, (msg) ->
         # show logs url
         msg.send "Logs at: https://botbot.me/freenode/fpnith/"
 
