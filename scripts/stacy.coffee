@@ -20,7 +20,7 @@ module.exports = (robot) ->
     	msg.send "I'm not theKillingJoke."
     	msg.send "You are theKillingJoke."
 
-    robot.hear /logs\s*?\s*/i, (msg) ->
+    robot.respond /^\s*logs\s*?\s*/i, (msg) ->
         # show logs url
         msg.send "Logs at: https://botbot.me/freenode/fpnith/"
 
@@ -30,3 +30,5 @@ module.exports = (robot) ->
     robot.hear /^\s*why\s+fp\s*?/i, (msg) ->
         msg.send "Tail recursion is its own reward."
         msg.send "https://xkcd.com/1270/"
+    
+ 
